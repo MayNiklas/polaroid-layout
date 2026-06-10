@@ -5,6 +5,8 @@ print it at 100% and cut along the marks for a real polaroid-looking print.
 
 Everything runs **in your browser**. Your photo is never uploaded anywhere.
 
+> Built this little tool for my Mom.
+
 ## What it does
 
 1. **Upload** a photo (drag-and-drop or file picker).
