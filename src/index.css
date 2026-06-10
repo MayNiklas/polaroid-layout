@@ -1,0 +1,211 @@
+:root {
+  font-family: system-ui, -apple-system, sans-serif;
+  /* Fixed light theme with high-contrast text (no system-dependent greys). */
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --muted: #4a4a4a;
+  --border: #b8b8b8;
+  --accent: #b85a12;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+#root {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+button {
+  font: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #f0f0f0;
+  color: var(--text);
+  cursor: pointer;
+}
+button:hover {
+  background: #e2e2e2;
+}
+
+.lead {
+  color: var(--muted);
+  max-width: 60ch;
+  line-height: 1.5;
+}
+
+/* Uploader */
+.uploader {
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.uploader--drag {
+  border-color: var(--accent);
+  background: rgba(184, 90, 18, 0.08);
+}
+
+/* Editor layout */
+.editor {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+}
+.editor__actions {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.editor__export {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+.editor__export:hover:not(:disabled) {
+  background: #9c4c0e;
+}
+.editor__export:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.editor__hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  flex-basis: 100%;
+}
+
+/* Crop editor */
+.crop-editor__stage {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  background: #222;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.crop-editor__zoom {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+.crop-editor__zoom input {
+  flex: 1;
+}
+
+/* Polaroid preview */
+.preview__page {
+  position: relative;
+  background: #ddd;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+.preview__polaroid {
+  position: absolute;
+  background: #fff;
+}
+.preview__photo {
+  position: absolute;
+  overflow: hidden;
+  background: #eee;
+}
+.preview__photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: fill;
+}
+.preview__caption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Settings panel */
+.settings {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem 1rem 1rem;
+  margin-bottom: 1.5rem;
+  background: #fafafa;
+}
+.settings summary {
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem 0;
+}
+.settings__body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.settings__row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-basis: 100%;
+}
+.settings fieldset {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem 0.75rem;
+  margin: 0;
+}
+.settings legend {
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0 0.4rem;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+.field__input {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.field input[type='number'] {
+  width: 5rem;
+  padding: 0.3rem 0.4rem;
+  font: inherit;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--text);
+}
+.field select {
+  padding: 0.3rem 0.4rem;
+  font: inherit;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--text);
+}
+.field__unit {
+  color: var(--muted);
+}
+.field--check {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.4rem;
+}
