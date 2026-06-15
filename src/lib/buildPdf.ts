@@ -77,23 +77,27 @@ function drawCropMarks(
     doc.line(c.x, c.y + c.dy * gap, c.x, c.y + c.dy * (gap + length))
   }
 
-  // Midpoint marks on each side, pointing outward. These give a second
-  // reference line per edge so a ruler is easier to align when cutting.
+  // Midpoint marks on each side, running parallel to their edge (offset into
+  // the bleed by `gap`). A mark aligned with the cut line stays useful even
+  // after the adjacent edges have already been cut away.
   const midX = offset.x + size.width / 2
   const midY = offset.y + size.height / 2
+  // n = outward normal (offset direction), t = tangent (along the edge).
   const sides = [
-    { x: midX, y: top, dx: 0, dy: -1 }, // top edge
-    { x: midX, y: bottom, dx: 0, dy: 1 }, // bottom edge
-    { x: left, y: midY, dx: -1, dy: 0 }, // left edge
-    { x: right, y: midY, dx: 1, dy: 0 }, // right edge
+    { mx: midX, my: top, nx: 0, ny: -1, tx: 1, ty: 0 }, // top edge
+    { mx: midX, my: bottom, nx: 0, ny: 1, tx: 1, ty: 0 }, // bottom edge
+    { mx: left, my: midY, nx: -1, ny: 0, tx: 0, ty: 1 }, // left edge
+    { mx: right, my: midY, nx: 1, ny: 0, tx: 0, ty: 1 }, // right edge
   ]
 
   for (const s of sides) {
+    const cx = s.mx + s.nx * gap
+    const cy = s.my + s.ny * gap
     doc.line(
-      s.x + s.dx * gap,
-      s.y + s.dy * gap,
-      s.x + s.dx * (gap + length),
-      s.y + s.dy * (gap + length),
+      cx - (s.tx * length) / 2,
+      cy - (s.ty * length) / 2,
+      cx + (s.tx * length) / 2,
+      cy + (s.ty * length) / 2,
     )
   }
 }
