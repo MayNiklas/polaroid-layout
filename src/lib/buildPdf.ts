@@ -76,4 +76,24 @@ function drawCropMarks(
     // Vertical mark.
     doc.line(c.x, c.y + c.dy * gap, c.x, c.y + c.dy * (gap + length))
   }
+
+  // Midpoint marks on each side, pointing outward. These give a second
+  // reference line per edge so a ruler is easier to align when cutting.
+  const midX = offset.x + size.width / 2
+  const midY = offset.y + size.height / 2
+  const sides = [
+    { x: midX, y: top, dx: 0, dy: -1 }, // top edge
+    { x: midX, y: bottom, dx: 0, dy: 1 }, // bottom edge
+    { x: left, y: midY, dx: -1, dy: 0 }, // left edge
+    { x: right, y: midY, dx: 1, dy: 0 }, // right edge
+  ]
+
+  for (const s of sides) {
+    doc.line(
+      s.x + s.dx * gap,
+      s.y + s.dy * gap,
+      s.x + s.dx * (gap + length),
+      s.y + s.dy * (gap + length),
+    )
+  }
 }
